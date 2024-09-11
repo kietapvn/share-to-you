@@ -17,7 +17,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Screenshots
 
-|                              Android                               |                            iOS                             |
-|:------------------------------------------------------------------:|:----------------------------------------------------------:|
-|     ![i_android_share.png](screenshots%2Fi_android_share.png)      |     ![i_ios_share.png](screenshots%2Fi_ios_share.png)      |
-| [record_android_share.mp4](screenshots%2Frecord_android_share.mp4) | [record_ios_share.mp4](screenshots%2Frecord_ios_share.mp4) |
+|                          Android                          |                        iOS                         |
+|:---------------------------------------------------------:|:--------------------------------------------------:|
+| ![i_android_share.png](screenshots%2Fi_android_share.png) | ![i_ios_share.png](screenshots%2Fi_ios_share.png)  |
+|  <video src='screenshots%2Frecord_android_share.mp4' />   | <video src='screenshots%2Frecord_ios_share.mp4' /> |
