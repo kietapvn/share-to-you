@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
+import 'package:share_to_you/views/detail_screen.dart';
 
 class SharedScreen extends StatelessWidget {
   const SharedScreen({
@@ -21,18 +22,24 @@ class SharedScreen extends StatelessWidget {
         title: const Text('Shared data'),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Shared files:",
-              style: textStyleBold,
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                "Shared data:",
+                style: textStyleBold,
+              ),
             ),
-            const SizedBox(height: 8),
-            Text(sharedFiles
-                .map((f) => f.toMap())
-                .join(",\n****************\n")),
+            for (final file in sharedFiles)
+              if (file.path.startsWith('http'))
+                LinkPreviewerWidget(url: file.path)
+              else
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Text(file.toMap().toString()),
+                ),
           ],
         ),
       ),

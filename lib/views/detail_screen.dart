@@ -31,40 +31,7 @@ class DetailScreen extends StatelessWidget {
         itemCount: _generateUrls().length,
         itemBuilder: (context, index) {
           final url = _generateUrls()[index];
-          return FutureBuilder<LinkPreviewData?>(
-              future: LinkPreviewer(url: url).previewData,
-              builder: (context, snapshot) {
-                final previewData = snapshot.data;
-                return ListTile(
-                  title: Text(url),
-                  subtitle: previewData != null
-                      ? Container(
-                          margin: const EdgeInsets.only(top: 8, left: 16),
-                          padding: const EdgeInsets.all(8),
-                          color: Colors.grey[200],
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Text(
-                                previewData.title,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
-                                maxLines: 1,
-                              ),
-                              Text(
-                                previewData.description,
-                                style: const TextStyle(color: Colors.grey),
-                                maxLines: 3,
-                              ),
-                            ],
-                          ),
-                        )
-                      : null,
-                  onTap: () {
-                    // Open the URL in a browser
-                  },
-                );
-              });
+          return LinkPreviewerWidget(url: url);
         },
         separatorBuilder: (context, index) => const Divider(),
       ),
@@ -84,5 +51,49 @@ class DetailScreen extends StatelessWidget {
       'https://www.facebook.com/tramgora/posts/pfbid02y59nyiursqqDxfR67PisQKppQihcbhDk96jvwt1RViT4JtEUucosDCDetvbGuPAxl',
       'https://www.facebook.com/tramgora/posts/pfbid023obgsV6m9EmuZCui3NuoVEHShwmZQE9bQ1AaxVnLWKXY36t5GH6fxg4fhrUebmrDl',
     ];
+  }
+}
+
+class LinkPreviewerWidget extends StatelessWidget {
+  LinkPreviewerWidget({super.key, required this.url});
+
+  final String url;
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<LinkPreviewData?>(
+      future: LinkPreviewer(url: url).previewData,
+      builder: (context, snapshot) {
+        final previewData = snapshot.data;
+        return ListTile(
+          title: Text(url),
+          subtitle: previewData != null
+              ? Container(
+                  margin: const EdgeInsets.only(top: 8, left: 16),
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.grey[200],
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        previewData.title,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        maxLines: 1,
+                      ),
+                      Text(
+                        previewData.description,
+                        style: const TextStyle(color: Colors.grey),
+                        maxLines: 3,
+                      ),
+                    ],
+                  ),
+                )
+              : null,
+          onTap: () {
+            // Open the URL in a browser
+          },
+        );
+      },
+    );
   }
 }
